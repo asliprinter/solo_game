@@ -18,26 +18,9 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        if (isTransitioning)
-        {
-            // Smoothly move toward the new room position
-            transform.position = Vector3.SmoothDamp(
-                transform.position,
-                targetPosition,
-                ref velocity,
-                roomSpeed
-            );
-
-            // Stop transitioning when close enough
-            if (Vector3.Distance(transform.position, targetPosition) < 0.05f)
-                isTransitioning = false;
-        }
-        else
-        {
-            // Follow player normally
             transform.position = new Vector3(
                 player.position.x + lookAhead,
-                transform.position.y,
+                player.position.y + 2.5f,
                 transform.position.z
             );
 
@@ -46,9 +29,9 @@ public class CameraController : MonoBehaviour
                 aheadDistance * player.localScale.x,
                 Time.deltaTime * cameraSpeed
             );
-        }
     }
 
+    //not using it?
     public void MoveToNewRoom(Transform newRo)
     {
         // Start smooth transition toward the new room
@@ -59,23 +42,4 @@ public class CameraController : MonoBehaviour
         );
         isTransitioning = true;
     }
-
-
-        /*
-            void Update()
-            {
-               // room camera
-                // transform.position = Vector3.SmoothDamp(transform.position, new Vector3(currentPosX, transform.position.y, transform.position.z), 
-               //     ref velocity, speed);
-
-
-                transform.position = new Vector3(player.position.x + lookAhead, transform.position.y, transform.position.z);
-                lookAhead = Mathf.Lerp(lookAhead, aheadDistance * player.localScale.x, Time.deltaTime * cameraSpeed);
-            }
-
-            public void MoveToNewRoom(Transform newRo)
-            {
-                currentPosX = newRo.position.x;
-            }
-        */
-    }
+ }
