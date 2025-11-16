@@ -1,20 +1,21 @@
 using UnityEngine;
 
-public class Enemies_Horizontal : MonoBehaviour
+public class Enemies_Horizontal : EnemyBase
 {
-    [SerializeField] private float damage;
     [SerializeField] private float movementDistance;
     [SerializeField] private float speed;
     private bool movingLeft;
     private float leftEdge;
     private float rightEdge;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         leftEdge = transform.position.x - movementDistance;
         rightEdge = transform.position.x + movementDistance;
         Flip();  //becauuse they be moving left
     }
+
 
     private void Update()
     {
@@ -44,19 +45,11 @@ public class Enemies_Horizontal : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        
-        if (other.tag == "Player")
-        {
-            other.GetComponent<Health>().TakeDamage(damage);
-        }
-    }
-
     private void Flip()
     {
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
     }
+
 }
