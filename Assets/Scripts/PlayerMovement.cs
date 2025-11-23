@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Animator anim;
 
-    private float wallJumpCooldown;
     private float horizontalInput;
     private bool facingRight = true;
 
@@ -41,25 +40,6 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("run", horizontalInput != 0);
         anim.SetBool("grounded", isGrounded());
 
-        /*
-        if (wallJumpCooldown > 0.2f)
-        {
-            body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
-
-            if (onWall() && !isGrounded())
-            {
-                //body.gravityScale = 0;
-                body.velocity = Vector2.zero;
-            }
-            else
-                body.gravityScale = 3;
-
-            if (Input.GetKey(KeyCode.Space))
-                Jump();
-        }
-        else
-            wallJumpCooldown += Time.deltaTime;
-        */
         body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
         if (Input.GetKey(KeyCode.Space))
@@ -81,19 +61,6 @@ public class PlayerMovement : MonoBehaviour
         {
             body.velocity = new Vector2(body.velocity.x, jumpPower);
         }
-        /*
-        else if (onWall() && !isGrounded())
-        {
-            if (horizontalInput == 0)
-            {
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
-            }
-            else
-                body.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, jumpPower);
-            
-            wallJumpCooldown = 0;            
-        }
-        */
     }
 
     private bool isGrounded()

@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     {
             transform.position = new Vector3(
                 player.position.x + lookAhead,
-                player.position.y + 2.5f,
+                player.position.y + 2f,
                 transform.position.z
             );
 

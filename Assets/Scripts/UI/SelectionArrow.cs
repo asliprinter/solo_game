@@ -4,6 +4,9 @@ using UnityEngine.UI;
 public class SelectionArrow : MonoBehaviour
 {
     [SerializeField] private RectTransform[] options;
+    [SerializeField] private AudioClip changeSound;
+    [SerializeField] private AudioClip selectSound;
+
     private RectTransform rect;
     private int currentPos;
 
@@ -26,6 +29,9 @@ public class SelectionArrow : MonoBehaviour
     private void ChangePosition(int _change)
     {
         currentPos += _change;
+        if (_change != 0)
+            SoundManager.instance.PlaySound(changeSound);
+
 
         if (currentPos < 0)
             currentPos = options.Length - 1;
@@ -38,5 +44,6 @@ public class SelectionArrow : MonoBehaviour
     private void Interact()
     {
         options[currentPos].GetComponent<Button>().onClick.Invoke();
+        SoundManager.instance.PlaySound(selectSound);
     }
 }
