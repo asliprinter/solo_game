@@ -12,7 +12,10 @@ public class Door : MonoBehaviour
         {
             foreach (GameObject enemyObj in enemies)
             {
+                if (enemyObj == null) continue;
+
                 EnemyBase enemy = enemyObj.GetComponent<EnemyBase>();
+
                 if (enemy != null)
                 {
                     enemy.Reactivate(); // ensures they are alive again
